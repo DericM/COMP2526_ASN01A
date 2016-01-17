@@ -61,10 +61,11 @@ public class Contacts {
                 choice = input.nextInt();
             } catch (Exception e) {
             }
-            if (choice > 0 && choice <= 5)
+            if (choice > 0 && choice <= 5) {
                 done = true;
-            else
+            } else {
                 System.out.println("\nYour choice is incorrect, please try again");
+            }
         }
         return choice;
     }
@@ -92,10 +93,11 @@ public class Contacts {
             System.out.println("");
         } catch (Exception e) {
         }
-        if (!remove(name))
+        if (!remove(name)) {
             System.out.println("Could not delete " + name);
-        else
+        } else {
             System.out.println(name + " was deleted successfully");
+        }
     }
 
     public void findPerson() {
