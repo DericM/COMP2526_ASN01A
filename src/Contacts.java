@@ -9,14 +9,22 @@ public class Contacts {
         input = new Scanner(System.in);
     }
 
+    /** Add a new person to the database.
+     *  @param name of the new person.
+     *  @param number of the new person.
+     */
     public void add(final String name, final String number) {
         Person[] temp = new Person[database.length + 1];
-        Person p = new Person(name, number);
+        Person person = new Person(name, number);
         System.arraycopy(database, 0, temp, 0, database.length);
-        temp[database.length] = p;
+        temp[database.length] = person;
         database = temp;
     }
 
+    /** Search the database for a matching person.
+     * Returns the index of the person, or -1 if not found.
+     * @param name of the person to find.
+     */
     public int search(final String name) {
         for (int i = 0; i < database.length; i++) {
             if (database[i].getName().equals(name)) {
@@ -26,12 +34,18 @@ public class Contacts {
         return -1;
     }
 
+    /** Print all the People in the database.
+     */
     public void displayAll() {
         for (int i = 0; i < database.length; i++) {
             System.out.println(database[i].toString());
         }
     }
 
+    /** Remove a person from the database.
+     * Return true if successful, false if not.
+     * @param name of the person to find.
+     */
     public boolean remove(final String name) {
         int pos = search(name);
         if (pos >= 0) {
@@ -44,6 +58,8 @@ public class Contacts {
         return false;
     }
 
+    /** Print out a basic menu.
+     */
     public void displayMenu() {
         System.out.println("\n\n\n1) Add");
         System.out.println("2) Delete");
@@ -52,6 +68,9 @@ public class Contacts {
         System.out.println("5) Exit\n");
     }
 
+    /** Read in the user selection.
+     * Return the users selection (1-5).
+     */
     public int getChoice() {
         int choice = 4;// default
         boolean done = false;
@@ -60,6 +79,7 @@ public class Contacts {
             try {
                 choice = input.nextInt();
             } catch (Exception e) {
+                ;
             }
             if (choice > 0 && choice <= 5) {
                 done = true;
@@ -70,10 +90,12 @@ public class Contacts {
         return choice;
     }
 
+    /** Read in a name and a phone number to add a new person.
+     */
     public void addPerson() {
         String name = "";
         String phone = "";
-        boolean done = false;
+        //boolean done = false;
         try {
             System.out.print("Enter the persons name ");
             name = input.next();
@@ -81,10 +103,13 @@ public class Contacts {
             phone = input.next();
             System.out.println("");
         } catch (Exception e) {
+            ;
         }
         add(name, phone);
     }
 
+    /** Read in a name of a person to delete.
+     */
     public void deletePerson() {
         String name = "";
         try {
@@ -92,6 +117,7 @@ public class Contacts {
             name = input.next();
             System.out.println("");
         } catch (Exception e) {
+            ;
         }
         if (!remove(name)) {
             System.out.println("Could not delete " + name);
@@ -100,6 +126,8 @@ public class Contacts {
         }
     }
 
+    /** Read in a name of a person to find.
+     */
     public void findPerson() {
         String name = "";
         try {
@@ -107,6 +135,7 @@ public class Contacts {
             name = input.next();
             System.out.println("");
         } catch (Exception e) {
+            ;
         }
         int pos = search(name);
         if (pos >= 0) {
@@ -116,25 +145,28 @@ public class Contacts {
         }
     }
 
+    /** Call the correct method depending on user input.
+     */
     public void run() {
         int choice = 0;
         do {
             displayMenu();
             choice = getChoice();
             switch (choice) {
-            case 1:
-                addPerson();
-                break;
-            case 2:
-                deletePerson();
-                break;
-            case 3:
-                findPerson();
-                break;
-            case 4:
-                displayAll();
-            default:
-                // should not get here
+              case 1:
+                  addPerson();
+                  break;
+              case 2:
+                  deletePerson();
+                  break;
+              case 3:
+                  findPerson();
+                  break;
+              case 4:
+                  displayAll();
+                  break;
+              default:
+                  // should not get here
             }
 
         } while (choice != 5);
