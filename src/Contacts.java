@@ -7,7 +7,7 @@ public class Contacts {
     public Contacts() {
         database = new Person[0];
         input = new Scanner(System.in);
-    }
+    } 
 
     /** Add a new person to the database.
      *  @param name of the new person.
